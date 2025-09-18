@@ -46,10 +46,6 @@ const req = http.request(options, (res) => {
     console.log('');
     console.log("\nTransmissão finalizada.");
   });
-
-  res.on("end", () => {
-    console.log("\nTransmissão finalizada.");
-  });
 });
 
 req.on("error", (e) => {
