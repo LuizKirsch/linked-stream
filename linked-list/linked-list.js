@@ -58,26 +58,97 @@ export class LinkedList {
   começando pelo 0. Caso não exista elemento no índice,
   devolva null.
   */
-  getAt(index) {}
+  getAt(index) {
+    if (index < 0 || index >= this.size) {
+      return null;
+    }
+    let current = this.head;
+    let count = 0;
+    while (current !== null) {
+      if (count === index) {
+        return current.value;
+      }
+      current = current.next;
+      count++;
+    }
+    return null;
+  }
 
   /* 2) Retorna o tamanho da lista encadeada */
-  getSize() {}
+  getSize() {
+    return this.size;
+  }
 
   /* 3) Este método deve remover um elemento pelo
   índice e retornar o seu valor */
-  removeAt(index) {}
+  removeAt(index) {
+    if (index < 0 || index >= this.size) {
+      return null;
+    }
+
+    this.size--;
+    let current = this.head;
+
+    if (index === 0) {
+      this.head = current.next;
+      return current.value;
+    }
+
+    let count = 0;
+    while (current !== null) {
+      if (count === index - 1) {
+        const value = current.next.value;
+        current.next = current.next.next;
+        return value;
+      }
+      current = current.next;
+      count++;
+    }
+    return null;
+  }
 
   /* 4) Este método deve procurar um elemento pelo valor e
   retornar o primeiro índice encontrado. Caso o valor
   não exista, retorne -1 */
-  search(value) {}
+  search(value) {
+    let current = this.head;
+    let index = 0;
+    while (current !== null) {
+      if (current.value === value) {
+        return index;
+      }
+      current = current.next;
+      index++;
+    }
+    return -1;
+  }
 
   /* 5) Este método deve procurar um elemento pelo valor e
   retornar o último índice encontrado. Caso o valor
   não exista, retorne -1 */
-  searchLast(value) {}
+  searchLast(value) {
+    let current = this.head;
+    let index = -1;
+    let count = 0;
+    while (current !== null) {
+      if (current.value === value) {
+        index = count;
+      }
+      current = current.next;
+      count++;
+    }
+    return index;
+  }
 
   /* 6) Este método deve retornar um vetor com
   os valores da lista encadeada */
-  toArray() {}
+  toArray() {
+    const result = [];
+    let current = this.head;
+    while (current !== null) {
+      result.push(current.value);
+      current = current.next;
+    }
+    return result;
+  }
 }

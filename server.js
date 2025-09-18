@@ -2,16 +2,21 @@ import http from "http";
 import { LinkedList } from "./linked-list/linked-list.js";
 
 /*
-7) Faça com que data seja uma instância de lista encadeada
+7) Faça com que data seja uma instância de lista encadeada*/
+const data = new LinkedList();
+/*
 8) Utilize o método add para adicionar:
 "verde", "azul", "amarelo", "branco", "preto", "roxo", "verde", "vermelho"
 Precisa ser nesta ordem, exatamente igual!
 */
-const data = /* trocar por lista encadeada /\ */ [
-  "a",
-  "b",
-  "c",
-]; /* /\ trocar por lista encadeada */
+data.add("verde");
+data.add("azul");
+data.add("amarelo");
+data.add("branco");
+data.add("preto");
+data.add("roxo");
+data.add("verde");
+data.add("vermelho");
 
 const server = http.createServer(async (req, res) => {
   res.writeHead(200, {
@@ -19,12 +24,14 @@ const server = http.createServer(async (req, res) => {
     "Transfer-Encoding": "chunked",
   });
 
-  // Remova aqui \/
-  for (const item of data) {
-    res.write(item); // Esse função envia dados para o cliente!
-    await delay(1); // Essa função espera um segundo
+
+  // Envia cada cor da lista encadeada para o cliente, com pausa de 2 segundos
+  let node = data.head;
+  while (node) {
+    res.write(node.value + "\n");
+    await delay(2);
+    node = node.next;
   }
-  // Remova aqui /\
 
   /*
   9) Faça enviar todas as cores para o cliente,
