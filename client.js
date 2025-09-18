@@ -16,7 +16,7 @@ const req = http.request(options, (res) => {
 
   res.on("data", (chunk) => {
     /* 5) Utilize o método add para guardar cada chunk na lista encadeada */
-    linkedList.add(chunk);
+    linkedList.add(chunk.toString().trim());
     console.log(`Dado recebido: ${chunk}\n`);
   });
 
